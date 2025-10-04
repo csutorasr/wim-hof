@@ -155,6 +155,21 @@
             <p class="text-lg">You completed {{ exerciseConfig.rounds.length }} rounds</p>
             <p class="text-blue-200">Total time: {{ formattedTotalTime }}</p>
             
+            <!-- Indefinite Hold Durations -->
+            <div v-if="indefiniteHoldDurations.length > 0" class="mt-6 pt-6 border-t border-white/20">
+              <h3 class="text-xl font-semibold mb-4">Hold Durations</h3>
+              <div class="space-y-2">
+                <div 
+                  v-for="hold in indefiniteHoldDurations" 
+                  :key="hold.round"
+                  class="flex justify-between items-center bg-white/10 rounded-lg px-4 py-3"
+                >
+                  <span class="text-blue-200">Round {{ hold.round }}</span>
+                  <span class="text-2xl font-bold">{{ formatTime(hold.duration) }}</span>
+                </div>
+              </div>
+            </div>
+            
             <div class="pt-4">
               <UButton
                 color="white"
@@ -226,6 +241,7 @@ const breathingInstruction = ref('Inhale')
 const isPaused = ref(false)
 const indefiniteHoldStartTime = ref(0)
 const indefiniteHoldElapsed = ref(0)
+const indefiniteHoldDurations = ref([])
 
 // Audio elements for breath sounds
 const breathInAudio = typeof window !== 'undefined' ? new Audio('sounds/breath-in.mp3') : null
@@ -268,6 +284,16 @@ const formatIndefiniteHoldTime = () => {
   return indefiniteHoldElapsed.value.toString()
 }
 
+// Format time in minutes and seconds
+const formatTime = (seconds) => {
+  const mins = Math.floor(seconds / 60)
+  const secs = seconds % 60
+  if (mins > 0) {
+    return `${mins}m ${secs}s`
+  }
+  return `${secs}s`
+}
+
 // Methods
 const exitSession = () => {
   clearInterval(intervalId)
@@ -297,6 +323,12 @@ const skipPhase = () => {
 
 const skipIndefiniteHold = () => {
   if (currentPhase.value === 'hold' && currentRoundConfig.value.indefiniteHold) {
+    // Store the duration before resetting
+    indefiniteHoldDurations.value.push({
+      round: currentRound.value + 1,
+      duration: indefiniteHoldElapsed.value
+    })
+    
     indefiniteHoldStartTime.value = 0
     indefiniteHoldElapsed.value = 0
     clearInterval(intervalId)
@@ -422,6 +454,7 @@ const startRestPhase = () => {
 const completeSession = () => {
   currentPhase.value = 'complete'
   clearInterval(intervalId)
+  clearInterval(sessionTimerInterval)
 }
 
 // Initialize session
