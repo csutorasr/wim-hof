@@ -1,3 +1,8 @@
+## Copilot Output Guidelines
+
+- Skip generating unuseful comments (such as `// ...existing code...` or placeholder comments that do not add value).
+- Do not include empty code instructions or boilerplate that does not contribute to the solution.
+
 # Copilot Instructions
 
 This is a Nuxt 4 application for exploring the Wim Hof Method breathing exercises, built with Vue 3 and Nuxt UI components.
