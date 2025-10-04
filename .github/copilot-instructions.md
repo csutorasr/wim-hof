@@ -23,6 +23,16 @@ npm run build        # Production build
 npx eslint .         # Lint (uses .nuxt/eslint.config.mjs)
 ```
 
+### Commit Standards
+- **Use Conventional Commits**: Follow the conventional commits specification for all commit messages
+- Format: `type(scope): description`
+- Common types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+- Examples:
+  - `feat(breathing): add preset saving functionality`
+  - `fix(ui): replace alerts with toast notifications`
+  - `docs(readme): update installation instructions`
+  - `refactor(components): convert to use UFormField`
+
 ### Directory Structure Conventions
 - `app/pages/` → Auto-generated routes (file-based routing)
 - `app/components/` → Auto-imported Vue components
@@ -50,6 +60,10 @@ Use Nuxt UI components first before custom implementations:
 - Use `UCard`, `UContainer` for layouts
 - Leverage built-in Tailwind integration
 - Components auto-import without registration
+- **Never use `alert()` or `confirm()` - always use Nuxt UI components instead:**
+  - Use `useToast()` for notifications and feedback messages
+  - Use `UModal` for confirmation dialogs
+  - Use `UNotification` for status updates
 
 ## Integration Points
 

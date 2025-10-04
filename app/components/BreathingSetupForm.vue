@@ -189,7 +189,7 @@ const props = defineProps({
 })
 
 // Define emits first
-const emit = defineEmits(['start-exercise'])
+const emit = defineEmits(['start-exercise', 'save-preset'])
 
 // Reactive state - initialize from props
 const globalSettings = ref({ ...props.initialGlobalSettings })
@@ -212,8 +212,12 @@ const resetToDefault = () => {
 }
 
 const savePreset = () => {
-  // TODO: Implement preset saving functionality
-  console.log('Saving preset:', { globalSettings: globalSettings.value, rounds: rounds.value })
+  const presetData = {
+    globalSettings: globalSettings.value,
+    rounds: rounds.value
+  }
+  console.log('Saving preset:', presetData)
+  emit('save-preset', presetData)
 }
 
 const startExercise = () => {
