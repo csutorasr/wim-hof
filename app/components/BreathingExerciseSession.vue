@@ -1,7 +1,17 @@
 <template>
   <div class="fixed inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 z-50">
+    <!-- Transparent full-screen skip button for indefinite hold -->
+    <div 
+      v-if="currentPhase === 'hold' && currentRoundConfig.indefiniteHold"
+      class="absolute inset-0 z-50 cursor-pointer"
+      @click="skipIndefiniteHold"
+    />
+    
     <!-- Header with session info and controls -->
-    <div class="absolute top-0 left-0 right-0 z-10 p-6">
+    <div 
+      v-if="!(currentPhase === 'hold' && currentRoundConfig.indefiniteHold)"
+      class="absolute top-0 left-0 right-0 z-10 p-6"
+    >
       <div class="flex items-center justify-between text-white">
         <div class="flex items-center gap-4">
           <UButton
@@ -81,16 +91,20 @@
         <div v-else-if="currentPhase === 'hold'" class="space-y-8">
           <div class="space-y-4">
             <h2 class="text-4xl font-bold">Hold Your Breath</h2>
-            <p class="text-xl text-blue-200">Retention phase</p>
+            <p class="text-xl text-blue-200">
+              {{ currentRoundConfig.indefiniteHold ? 'Tap screen to continue' : 'Retention phase' }}
+            </p>
           </div>
           
           <div class="text-8xl font-bold text-yellow-300">
-            {{ Math.ceil(countdownTimer) }}
+            {{ currentRoundConfig.indefiniteHold ? formatIndefiniteHoldTime() : Math.ceil(countdownTimer) }}
           </div>
           
           <div class="space-y-2">
             <p class="text-lg">Stay relaxed</p>
-            <p class="text-blue-200">Don't force it - breathe when you need to</p>
+            <p class="text-blue-200">
+              {{ currentRoundConfig.indefiniteHold ? 'Breathe when you need to' : 'Don\'t force it - breathe when you need to' }}
+            </p>
           </div>
         </div>
 
@@ -154,7 +168,10 @@
         </div>
 
         <!-- Skip/Pause Controls -->
-        <div v-if="currentPhase !== 'complete'" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-4">
+        <div 
+          v-if="currentPhase !== 'complete' && !(currentPhase === 'hold' && currentRoundConfig.indefiniteHold)" 
+          class="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-4"
+        >
           <div class="flex gap-4">
             <UButton
               icon="i-heroicons-forward"
@@ -207,6 +224,8 @@ const currentCycle = ref(0)
 const countdownTimer = ref(0)
 const breathingInstruction = ref('Inhale')
 const isPaused = ref(false)
+const indefiniteHoldStartTime = ref(0)
+const indefiniteHoldElapsed = ref(0)
 
 // Audio elements for breath sounds
 const breathInAudio = typeof window !== 'undefined' ? new Audio('sounds/breath-in.mp3') : null
@@ -244,6 +263,11 @@ const formattedTotalTime = computed(() => {
   return `${elapsedTime.value}s`
 })
 
+// Format indefinite hold time (counting upwards)
+const formatIndefiniteHoldTime = () => {
+  return indefiniteHoldElapsed.value.toString()
+}
+
 // Methods
 const exitSession = () => {
   clearInterval(intervalId)
@@ -271,11 +295,26 @@ const skipPhase = () => {
   }
 }
 
+const skipIndefiniteHold = () => {
+  if (currentPhase.value === 'hold' && currentRoundConfig.value.indefiniteHold) {
+    indefiniteHoldStartTime.value = 0
+    indefiniteHoldElapsed.value = 0
+    clearInterval(intervalId)
+    startRecoveryPhase()
+  }
+}
+
 const startTimer = () => {
   if (intervalId) clearInterval(intervalId)
   
   intervalId = setInterval(() => {
     if (isPaused.value) return
+    
+    // For indefinite hold, count upwards
+    if (currentPhase.value === 'hold' && currentRoundConfig.value.indefiniteHold) {
+      indefiniteHoldElapsed.value = Math.floor((Date.now() - indefiniteHoldStartTime.value) / 1000)
+      return
+    }
     
     countdownTimer.value -= 0.1
     
@@ -353,8 +392,17 @@ const startBreathingRound = () => {
 
 const startHoldPhase = () => {
   currentPhase.value = 'hold'
-  countdownTimer.value = currentRoundConfig.value.holdDuration
-  startTimer()
+  if (currentRoundConfig.value.indefiniteHold) {
+    // Start counting upwards
+    indefiniteHoldStartTime.value = Date.now()
+    indefiniteHoldElapsed.value = 0
+    countdownTimer.value = 0
+    // Still need a timer to update the display
+    startTimer()
+  } else {
+    countdownTimer.value = currentRoundConfig.value.holdDuration
+    startTimer()
+  }
 }
 
 const startRecoveryPhase = () => {

@@ -101,9 +101,20 @@
                   min="15" 
                   max="300"
                   placeholder="60"
+                  :disabled="round.indefiniteHold"
                 />
                 <template #help>
                   <span class="text-xs">Hold after exhale (retention)</span>
+                </template>
+              </UFormField>
+
+              <UFormField label="Indefinite Hold">
+                <UCheckbox 
+                  v-model="round.indefiniteHold"
+                  label="Count upwards until manually skipped"
+                />
+                <template #help>
+                  <span class="text-xs">Hold until you choose to continue</span>
                 </template>
               </UFormField>
 
@@ -178,6 +189,7 @@ const props = defineProps({
       inhaleDuration: 2,
       exhaleDuration: 1,
       holdDuration: 60,
+      indefiniteHold: false,
       recoveryHold: 15,
       notes: ''
     })
