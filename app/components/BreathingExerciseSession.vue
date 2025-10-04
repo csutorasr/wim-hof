@@ -39,148 +39,49 @@
       <div class="text-center text-white max-w-2xl mx-auto">
         
         <!-- Preparation Phase -->
-        <div v-if="currentPhase === 'preparation'" class="space-y-8">
-          <div class="space-y-4">
-            <h2 class="text-4xl font-bold">Get Ready</h2>
-            <p class="text-xl text-blue-200">Prepare for your breathing session</p>
-          </div>
-          
-          <div class="text-8xl font-bold text-blue-300">
-            {{ Math.ceil(countdownTimer) }}
-          </div>
-          
-          <div class="space-y-2">
-            <p class="text-lg">Find a comfortable position</p>
-            <p class="text-blue-200">Relax and focus on your breathing</p>
-          </div>
-        </div>
+        <BreathingPhasesPreparationPhase 
+          v-if="currentPhase === 'preparation'"
+          :timer="countdownTimer"
+        />
 
         <!-- Breathing Phase -->
-        <div v-else-if="currentPhase === 'breathing'" class="space-y-8">
-          <!-- Breathing Circle Animation -->
-          <div 
-            class="flex items-center justify-center p-8 transition-all duration-1000"
-          >
-            <div 
-              class="w-80 h-80 rounded-full border-4 border-white/30 flex flex-col items-center justify-center transition-all duration-1000 relative"
-              :class="{
-                'scale-75 border-white/20': breathingInstruction === 'Exhale',
-                'scale-100 border-white/60': breathingInstruction === 'Inhale'
-              }"
-            >
-              <div 
-                class="absolute inset-0 flex flex-col items-center justify-center transform transition-all duration-1000"
-                :class="{
-                  'scale-133': breathingInstruction === 'Exhale',
-                  'scale-100': breathingInstruction === 'Inhale'
-                }"
-              >
-                <div class="text-3xl font-bold mb-2">{{ breathingInstruction }}</div>
-                <div class="text-6xl font-bold mb-2">
-                  {{ Math.ceil(countdownTimer) }}
-                </div>
-                <div class="text-sm text-blue-200">
-                  Cycle {{ currentCycle + 1 }} of {{ currentRoundConfig.cycles }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <BreathingPhasesBreathingPhase
+          v-else-if="currentPhase === 'breathing'"
+          :timer="countdownTimer"
+          :instruction="breathingInstruction"
+          :current-cycle="currentCycle"
+          :total-cycles="currentRoundConfig.cycles"
+        />
 
         <!-- Hold Phase -->
-        <div v-else-if="currentPhase === 'hold'" class="space-y-8">
-          <div class="space-y-4">
-            <h2 class="text-4xl font-bold">Hold Your Breath</h2>
-            <p class="text-xl text-blue-200">
-              {{ currentRoundConfig.indefiniteHold ? 'Tap screen to continue' : 'Retention phase' }}
-            </p>
-          </div>
-          
-          <div class="text-8xl font-bold text-yellow-300">
-            {{ currentRoundConfig.indefiniteHold ? formatIndefiniteHoldTime() : Math.ceil(countdownTimer) }}
-          </div>
-          
-          <div class="space-y-2">
-            <p class="text-lg">Stay relaxed</p>
-            <p class="text-blue-200">
-              {{ currentRoundConfig.indefiniteHold ? 'Breathe when you need to' : 'Don\'t force it - breathe when you need to' }}
-            </p>
-          </div>
-        </div>
+        <BreathingPhasesHoldPhase
+          v-else-if="currentPhase === 'hold'"
+          :timer="countdownTimer"
+          :is-indefinite="currentRoundConfig.indefiniteHold"
+          :indefinite-elapsed="indefiniteHoldElapsed"
+        />
 
         <!-- Recovery Hold Phase -->
-        <div v-else-if="currentPhase === 'recovery'" class="space-y-8">
-          <div class="space-y-4">
-            <h2 class="text-4xl font-bold">Recovery Breath</h2>
-            <p class="text-xl text-blue-200">Take a deep breath and hold</p>
-          </div>
-          
-          <div class="text-8xl font-bold text-green-300">
-            {{ Math.ceil(countdownTimer) }}
-          </div>
-          
-          <div class="space-y-2">
-            <p class="text-lg">Deep inhale and hold</p>
-            <p class="text-blue-200">Feel the energy flowing</p>
-          </div>
-        </div>
+        <BreathingPhasesRecoveryPhase
+          v-else-if="currentPhase === 'recovery'"
+          :timer="countdownTimer"
+        />
 
         <!-- Rest Phase -->
-        <div v-else-if="currentPhase === 'rest'" class="space-y-8">
-          <div class="space-y-4">
-            <h2 class="text-4xl font-bold">Rest</h2>
-            <p class="text-xl text-blue-200">Prepare for next round</p>
-          </div>
-          
-          <div class="text-8xl font-bold text-purple-300">
-            {{ Math.ceil(countdownTimer) }}
-          </div>
-          
-          <div class="space-y-2">
-            <p class="text-lg">Breathe naturally</p>
-            <p class="text-blue-200">Next: Round {{ currentRound + 2 }}</p>
-          </div>
-        </div>
+        <BreathingPhasesRestPhase
+          v-else-if="currentPhase === 'rest'"
+          :timer="countdownTimer"
+          :next-round="currentRound + 2"
+        />
 
         <!-- Completion Phase -->
-        <div v-else-if="currentPhase === 'complete'" class="space-y-8">
-          <div class="space-y-4">
-            <h2 class="text-4xl font-bold">Session Complete!</h2>
-            <p class="text-xl text-blue-200">Well done!</p>
-          </div>
-          
-          <div class="text-6xl">🎉</div>
-          
-          <div class="space-y-4">
-            <p class="text-lg">You completed {{ exerciseConfig.rounds.length }} rounds</p>
-            <p class="text-blue-200">Total time: {{ formattedTotalTime }}</p>
-            
-            <!-- Indefinite Hold Durations -->
-            <div v-if="indefiniteHoldDurations.length > 0" class="mt-6 pt-6 border-t border-white/20">
-              <h3 class="text-xl font-semibold mb-4">Hold Durations</h3>
-              <div class="space-y-2">
-                <div 
-                  v-for="hold in indefiniteHoldDurations" 
-                  :key="hold.round"
-                  class="flex justify-between items-center bg-white/10 rounded-lg px-4 py-3"
-                >
-                  <span class="text-blue-200">Round {{ hold.round }}</span>
-                  <span class="text-2xl font-bold">{{ formatTime(hold.duration) }}</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="pt-4">
-              <UButton
-                color="white"
-                size="lg"
-                @click="exitSession"
-              >
-                Return to Setup
-              </UButton>
-            </div>
-          </div>
-        </div>
+        <BreathingPhasesCompletionPhase
+          v-else-if="currentPhase === 'complete'"
+          :total-rounds="exerciseConfig.rounds.length"
+          :total-time="formattedTotalTime"
+          :hold-durations="indefiniteHoldDurations"
+          @exit="exitSession"
+        />
 
         <!-- Skip/Pause Controls -->
         <div 
@@ -278,21 +179,6 @@ const currentRoundConfig = computed(() => {
 const formattedTotalTime = computed(() => {
   return `${elapsedTime.value}s`
 })
-
-// Format indefinite hold time (counting upwards)
-const formatIndefiniteHoldTime = () => {
-  return indefiniteHoldElapsed.value.toString()
-}
-
-// Format time in minutes and seconds
-const formatTime = (seconds) => {
-  const mins = Math.floor(seconds / 60)
-  const secs = seconds % 60
-  if (mins > 0) {
-    return `${mins}m ${secs}s`
-  }
-  return `${secs}s`
-}
 
 // Methods
 const exitSession = () => {
