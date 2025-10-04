@@ -8,22 +8,14 @@
       </div>
 
       <div class="flex justify-center">
-        <BreathingSetupForm 
-          :initial-global-settings="initialGlobalSettings"
-          :initial-rounds="initialRounds"
-          @start-exercise="handleStartExercise"
-          @save-preset="handleSavePreset"
-        />
+        <BreathingSetupForm :initial-global-settings="initialGlobalSettings" :initial-rounds="initialRounds"
+          @start-exercise="handleStartExercise" @save-preset="handleSavePreset" />
       </div>
     </UContainer>
   </div>
 
   <!-- Exercise Session Phase -->
-  <BreathingExerciseSession
-    v-else
-    :exercise-config="activeExerciseConfig"
-    @exit-session="handleExitSession"
-  />
+  <BreathingExerciseSession v-else :exercise-config="activeExerciseConfig" @exit-session="handleExitSession" />
 </template>
 
 <script setup>
@@ -89,11 +81,11 @@ const handleSavePreset = (presetData) => {
     try {
       localStorage.setItem('wim-hof-breathing-preset', JSON.stringify(presetData))
       console.log('Preset saved successfully')
-      
+
       // Update the reactive values to reflect the saved preset
       initialGlobalSettings.value = presetData.globalSettings
       initialRounds.value = presetData.rounds
-      
+
       // Show success toast
       toast.add({
         title: 'Preset Saved!',
@@ -103,7 +95,7 @@ const handleSavePreset = (presetData) => {
       })
     } catch (error) {
       console.error('Failed to save preset:', error)
-      
+
       // Show error toast
       toast.add({
         title: 'Save Failed',
