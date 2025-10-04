@@ -167,8 +167,8 @@ const props = defineProps({
   initialGlobalSettings: {
     type: Object,
     default: () => ({
-      preparationTime: 30,
-      restBetweenRounds: 60
+      preparationTime: 15,
+      restBetweenRounds: 5,
     })
   },
   initialRound: {
@@ -246,7 +246,7 @@ const totalEstimatedTime = computed(() => {
 })
 
 const formattedTime = computed(() => {
-  const totalSeconds = totalEstimatedTime.value
+  const totalSeconds = Math.round(totalEstimatedTime.value)
   const minutes = Math.floor(totalSeconds / 60)
   const seconds = totalSeconds % 60
   return `${minutes}m ${seconds}s`

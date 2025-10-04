@@ -1,5 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-8">
+  <!-- Setup Phase -->
+  <div v-if="!isExerciseActive" class="min-h-screen bg-gray-50 py-8">
     <UContainer class="max-w-4xl">
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-2">Wim Hof Method</h1>
@@ -16,13 +17,20 @@
       </div>
     </UContainer>
   </div>
+
+  <!-- Exercise Session Phase -->
+  <BreathingExerciseSession
+    v-else
+    :exercise-config="activeExerciseConfig"
+    @exit-session="handleExitSession"
+  />
 </template>
 
 <script setup>
 // Default configuration for Wim Hof Method
 const defaultGlobalSettings = {
-  preparationTime: 30,
-  restBetweenRounds: 60
+  preparationTime: 15,
+  restBetweenRounds: 5
 }
 
 const defaultRound = {
@@ -57,10 +65,19 @@ const savedPreset = loadSavedPreset()
 const initialGlobalSettings = ref(savedPreset.globalSettings)
 const initialRounds = ref(savedPreset.rounds)
 
+// Exercise session state
+const isExerciseActive = ref(false)
+const activeExerciseConfig = ref(null)
+
 const handleStartExercise = (exerciseConfig) => {
   console.log('Starting exercise with configuration:', exerciseConfig)
-  // TODO: Navigate to exercise execution view or show exercise interface
-  // For now, we'll just log the configuration
+  activeExerciseConfig.value = exerciseConfig
+  isExerciseActive.value = true
+}
+
+const handleExitSession = () => {
+  isExerciseActive.value = false
+  activeExerciseConfig.value = null
 }
 
 // Modal state
