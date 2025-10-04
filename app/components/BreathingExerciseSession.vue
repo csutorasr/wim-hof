@@ -208,6 +208,27 @@ const countdownTimer = ref(0)
 const breathingInstruction = ref('Inhale')
 const isPaused = ref(false)
 
+// Audio elements for breath sounds
+const breathInAudio = typeof window !== 'undefined' ? new Audio('sounds/breath-in.mp3') : null
+const breathOutAudio = typeof window !== 'undefined' ? new Audio('sounds/breath-out.mp3') : null
+
+function playBreathSound(type) {
+  // Stop both sounds before playing the new one
+  if (breathInAudio) {
+    breathInAudio.pause()
+    breathInAudio.currentTime = 0
+  }
+  if (breathOutAudio) {
+    breathOutAudio.pause()
+    breathOutAudio.currentTime = 0
+  }
+  if (type === 'Inhale' && breathInAudio) {
+    breathInAudio.play()
+  } else if (type === 'Exhale' && breathOutAudio) {
+    breathOutAudio.play()
+  }
+}
+
 // Timer management
 let intervalId = null
 let sessionTimerInterval = null
@@ -285,6 +306,7 @@ const nextPhase = () => {
       if (breathingInstruction.value === 'Inhale') {
         // Switch to exhale
         breathingInstruction.value = 'Exhale'
+        playBreathSound('Exhale')
         countdownTimer.value = currentRoundConfig.value.exhaleDuration
         startTimer()
       } else {
@@ -293,6 +315,7 @@ const nextPhase = () => {
         if (currentCycle.value < currentRoundConfig.value.cycles) {
           // Next breath cycle
           breathingInstruction.value = 'Inhale'
+          playBreathSound('Inhale')
           countdownTimer.value = currentRoundConfig.value.inhaleDuration
           startTimer()
         } else {
@@ -323,6 +346,7 @@ const startBreathingRound = () => {
   currentPhase.value = 'breathing'
   currentCycle.value = 0
   breathingInstruction.value = 'Inhale'
+  playBreathSound('Inhale')
   countdownTimer.value = currentRoundConfig.value.inhaleDuration
   startTimer()
 }
@@ -335,12 +359,14 @@ const startHoldPhase = () => {
 
 const startRecoveryPhase = () => {
   currentPhase.value = 'recovery'
+  playBreathSound('Inhale')
   countdownTimer.value = currentRoundConfig.value.recoveryHold
   startTimer()
 }
 
 const startRestPhase = () => {
   currentPhase.value = 'rest'
+  playBreathSound('Exhale')
   countdownTimer.value = props.exerciseConfig.globalSettings.restBetweenRounds
   startTimer()
 }
