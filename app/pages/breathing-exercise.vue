@@ -15,10 +15,11 @@
   </div>
 
   <!-- Exercise Session Phase -->
-  <BreathingExerciseSession v-else :exercise-config="activeExerciseConfig" @exit-session="handleExitSession" />
+  <BreathingExerciseSession v-else :exercise-config="activeExerciseConfig!" @exit-session="handleExitSession" />
 </template>
 
-<script setup>
+<script setup lang="ts">
+const { proxy } = useScriptGoogleAnalytics()
 // Default configuration for Wim Hof Method
 const defaultGlobalSettings = {
   preparationTime: 15,
@@ -59,15 +60,42 @@ const initialRounds = ref(savedPreset.rounds)
 
 // Exercise session state
 const isExerciseActive = ref(false)
-const activeExerciseConfig = ref(null)
+const activeExerciseConfig = ref<ExerciseConfig | null>(null)
 
-const handleStartExercise = (exerciseConfig) => {
-  console.log('Starting exercise with configuration:', exerciseConfig)
+
+interface GlobalSettings {
+  preparationTime: number
+  restBetweenRounds: number
+}
+
+interface Round {
+  cycles: number
+  inhaleDuration: number
+  exhaleDuration: number
+  holdDuration: number
+  recoveryHold: number
+  notes?: string
+}
+
+interface ExerciseConfig {
+  globalSettings: GlobalSettings
+  rounds: Round[]
+}
+
+const handleStartExercise = (exerciseConfig: ExerciseConfig) => {
+  // Google Analytics conversion: exercise started
+  if (proxy && typeof proxy.gtag === 'function') {
+    proxy.gtag('event', 'conversion', { event_category: 'breathing', event_label: 'start' })
+  }
   activeExerciseConfig.value = exerciseConfig
   isExerciseActive.value = true
 }
 
 const handleExitSession = () => {
+  // Google Analytics conversion: exercise finished
+  if (proxy && typeof proxy.gtag === 'function') {
+    proxy.gtag('event', 'conversion', { event_category: 'breathing', event_label: 'finish' })
+  }
   isExerciseActive.value = false
   activeExerciseConfig.value = null
 }
@@ -76,7 +104,7 @@ const handleExitSession = () => {
 const toast = useToast()
 
 // Handle saving preset from the form component
-const handleSavePreset = (presetData) => {
+const handleSavePreset = (presetData: ExerciseConfig) => {
   if (import.meta.client) {
     try {
       localStorage.setItem('wim-hof-breathing-preset', JSON.stringify(presetData))
@@ -91,7 +119,7 @@ const handleSavePreset = (presetData) => {
         title: 'Preset Saved!',
         description: 'Your breathing exercise configuration has been saved and will be loaded automatically next time.',
         icon: 'i-heroicons-check-circle',
-        color: 'green'
+        color: 'success'
       })
     } catch (error) {
       console.error('Failed to save preset:', error)
@@ -101,7 +129,7 @@ const handleSavePreset = (presetData) => {
         title: 'Save Failed',
         description: 'Failed to save preset. Please try again.',
         icon: 'i-heroicons-exclamation-triangle',
-        color: 'red'
+        color: 'error'
       })
     }
   }

@@ -12,4 +12,11 @@ export default defineNuxtConfig({
     "@nuxt/ui",
   ],
   css: ["~/assets/css/main.css"],
+  scripts: {
+    registry: {
+      googleAnalytics: {
+        id: 'G-K3RQL4YR4K',
+      }
+    }
+  }
 });
