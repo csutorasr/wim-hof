@@ -24,9 +24,9 @@ npx eslint .         # Lint (uses .nuxt/eslint.config.mjs)
 ```
 
 ### Directory Structure Conventions
-- `pages/` → Auto-generated routes (file-based routing)
-- `components/` → Auto-imported Vue components
-- `composables/` → Auto-imported composables
+- `app/pages/` → Auto-generated routes (file-based routing)
+- `app/components/` → Auto-imported Vue components
+- `app/composables/` → Auto-imported composables
 - `server/api/` → Backend API routes
 - `content/` → Markdown/YAML content for @nuxt/content
 
@@ -83,3 +83,7 @@ Based on project focus, expect to implement:
 - TypeScript enabled via Nuxt's built-in support
 - No custom styling setup yet - relies on Nuxt UI/Tailwind defaults
 - Development server includes hot reload and devtools
+
+## MCP
+
+- Use the Nuxt UI MCP components where possible.
