@@ -26,14 +26,33 @@ const defaultGlobalSettings = {
   restBetweenRounds: 5
 }
 
-const defaultRound = {
-  cycles: 30,
-  inhaleDuration: 2,
-  exhaleDuration: 1,
-  holdDuration: 60,
-  recoveryHold: 15,
-  notes: ''
-}
+
+const defaultRounds = [
+  {
+    cycles: 30,
+    inhaleDuration: 2,
+    exhaleDuration: 1,
+    holdDuration: 60, // 1 minute
+    recoveryHold: 15,
+    notes: ''
+  },
+  {
+    cycles: 30,
+    inhaleDuration: 2,
+    exhaleDuration: 1,
+    holdDuration: 90, // 1.5 minutes
+    recoveryHold: 15,
+    notes: ''
+  },
+  {
+    cycles: 30,
+    inhaleDuration: 2,
+    exhaleDuration: 1,
+    holdDuration: 120, // 2 minutes
+    recoveryHold: 15,
+    notes: ''
+  }
+]
 
 // Load saved preset from localStorage or use defaults
 const loadSavedPreset = () => {
@@ -49,7 +68,7 @@ const loadSavedPreset = () => {
   }
   return {
     globalSettings: defaultGlobalSettings,
-    rounds: [defaultRound]
+    rounds: defaultRounds
   }
 }
 
