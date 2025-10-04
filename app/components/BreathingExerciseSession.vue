@@ -47,28 +47,33 @@
 
         <!-- Breathing Phase -->
         <div v-else-if="currentPhase === 'breathing'" class="space-y-8">
-          <div class="space-y-4">
-            <h2 class="text-4xl font-bold">{{ breathingInstruction }}</h2>
-            <p class="text-xl text-blue-200">Cycle {{ currentCycle + 1 }} of {{ currentRoundConfig.cycles }}</p>
-          </div>
-          
           <!-- Breathing Circle Animation -->
-          <div class="flex items-center justify-center">
+          <div 
+            class="flex items-center justify-center p-8 transition-all duration-1000"
+          >
             <div 
-              class="w-64 h-64 rounded-full border-4 border-white/30 flex items-center justify-center transition-all duration-1000"
+              class="w-80 h-80 rounded-full border-4 border-white/30 flex flex-col items-center justify-center transition-all duration-1000 relative"
               :class="{
-                'scale-125 border-white/60': breathingInstruction === 'Inhale',
-                'scale-75 border-white/20': breathingInstruction === 'Exhale'
+                'scale-75 border-white/20': breathingInstruction === 'Exhale',
+                'scale-100 border-white/60': breathingInstruction === 'Inhale'
               }"
             >
-              <div class="text-6xl font-bold">
-                {{ Math.ceil(countdownTimer) }}
+              <div 
+                class="absolute inset-0 flex flex-col items-center justify-center transform transition-all duration-1000"
+                :class="{
+                  'scale-133': breathingInstruction === 'Exhale',
+                  'scale-100': breathingInstruction === 'Inhale'
+                }"
+              >
+                <div class="text-3xl font-bold mb-2">{{ breathingInstruction }}</div>
+                <div class="text-6xl font-bold mb-2">
+                  {{ Math.ceil(countdownTimer) }}
+                </div>
+                <div class="text-sm text-blue-200">
+                  Cycle {{ currentCycle + 1 }} of {{ currentRoundConfig.cycles }}
+                </div>
               </div>
             </div>
-          </div>
-          
-          <div class="text-lg text-blue-200">
-            Round {{ currentRound + 1 }} • {{ currentRoundConfig.cycles }} cycles
           </div>
         </div>
 
@@ -149,12 +154,14 @@
         </div>
 
         <!-- Skip/Pause Controls -->
-        <div v-if="currentPhase !== 'complete'" class="fixed bottom-8 left-1/2 transform -translate-x-1/2">
+        <div v-if="currentPhase !== 'complete'" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-4">
           <div class="flex gap-4">
             <UButton
               icon="i-heroicons-forward"
               color="white"
               variant="ghost"
+              size="xl"
+              class="px-6 py-4 text-lg min-h-14"
               @click="skipPhase"
             >
               Skip Phase
@@ -163,10 +170,19 @@
               :icon="isPaused ? 'i-heroicons-play' : 'i-heroicons-pause'"
               color="white"
               variant="ghost"
+              size="xl"
+              class="px-6 py-4 text-lg min-h-14"
               @click="togglePause"
             >
               {{ isPaused ? 'Resume' : 'Pause' }}
             </UButton>
+          </div>
+        </div>
+
+        <!-- Round Counter -->
+        <div v-if="currentPhase !== 'complete'" class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
+          <div class="text-sm text-white/70 text-center">
+            Round {{ currentRound + 1 }} of {{ exerciseConfig.rounds.length }}
           </div>
         </div>
       </div>
