@@ -7,9 +7,29 @@
         <p class="text-lg text-gray-600">Configure and start your breathing exercise</p>
       </div>
 
+      <UAlert
+        color="error"
+        variant="solid"
+        icon="i-heroicons-exclamation-triangle"
+        title="⚠️ Important Safety Notice"
+        class="mb-6"
+      >
+        <template #description>
+          <p class="mb-2">By proceeding with this exercise, you acknowledge that you have read and accepted our health & safety disclaimer. You use these techniques at your own risk.</p>
+          <p class="text-sm">Never practice while driving, swimming, or in any situation where loss of consciousness could cause harm.</p>
+        </template>
+        <template #actions>
+          <UButton to="/legal" color="neutral" variant="solid" size="sm">View Full Disclaimer</UButton>
+        </template>
+      </UAlert>
+
       <div class="flex justify-center">
-        <BreathingSetupForm :initial-global-settings="initialGlobalSettings" :initial-rounds="initialRounds"
-          @start-exercise="handleStartExercise" @save-preset="handleSavePreset" />
+        <BreathingSetupForm
+          :initial-global-settings="initialGlobalSettings"
+          :initial-rounds="initialRounds"
+          @start-exercise="handleStartExercise"
+          @save-preset="handleSavePreset"
+        />
       </div>
     </UContainer>
   </div>

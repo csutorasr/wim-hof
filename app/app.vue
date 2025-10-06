@@ -15,6 +15,19 @@
     </UBanner>
     <NuxtRouteAnnouncer />
     <NuxtPage />
+    
+    <!-- Footer with legal links -->
+    <footer class="border-t border-gray-200 mt-auto py-6 bg-gray-50">
+      <UContainer>
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-600">
+          <p>&copy; {{ new Date().getFullYear() }} Wim Hof Breathing App. Not affiliated with Wim Hof Method.</p>
+          <div class="flex gap-4">
+            <UButton to="/legal" variant="link" size="xs" color="neutral">Legal & Disclaimer</UButton>
+            <UButton to="/" variant="link" size="xs" color="neutral">Home</UButton>
+          </div>
+        </div>
+      </UContainer>
+    </footer>
   </UApp>
 </template>
 
