@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "@nuxt/ui",
     "@nuxtjs/sitemap",
-    "@nuxtjs/robots"
+    "@nuxtjs/robots",
+    "nuxt-schema-org"
   ],
   css: ["~/assets/css/main.css"],
   scripts: {
