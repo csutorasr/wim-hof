@@ -18,5 +18,10 @@ export default defineNuxtConfig({
         id: 'G-K3RQL4YR4K',
       }
     }
+  },
+  app: {
+    rootAttrs: {
+      class: 'flex-1 flex flex-col'
+    }
   }
 });

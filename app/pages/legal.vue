@@ -6,7 +6,7 @@
       </template>
       <div class="prose prose-blue">
         <h2 class="text-xl font-semibold mt-6 mb-4">Health & Safety Disclaimer</h2>
-        <p class="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+        <p class="bg-red-50 border-l-4 border-red-500 p-4 mb-4 text-red-500">
           <strong>WARNING:</strong> By using this website and engaging in breathing exercises, you acknowledge and accept full responsibility for any and all consequences, injuries, or harm that may result from your use of these techniques.
         </p>
         <p>
