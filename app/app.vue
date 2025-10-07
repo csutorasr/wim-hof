@@ -3,7 +3,7 @@
     <Meta name="google-site-verification" content="XT7Y8L0FGnHC1Tm6SRI6iJbwLVGhWd1lEov42N38kXE" />
   </Head>
   <UApp>
-    <UBanner color="info" icon="i-heroicons-cookie" title="This website uses cookies and local storage" close class="mb-2">
+    <UBanner color="neutral" icon="i-heroicons-cookie" title="This website uses cookies and local storage" close class="mb-2">
       <template #default>
         We use tracking (Google Analytics) and local storage to improve your experience. By continuing to use this site,
         you accept this usage.

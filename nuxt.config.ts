@@ -20,6 +20,11 @@ export default defineNuxtConfig({
     }
   },
   app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en'
+      }
+    },
     rootAttrs: {
       class: 'flex-1 flex flex-col'
     }
