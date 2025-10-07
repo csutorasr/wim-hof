@@ -39,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+defineOgImageComponent('NuxtSeo')
 const { proxy } = useScriptGoogleAnalytics()
 // Default configuration for Wim Hof Method
 const defaultGlobalSettings = {

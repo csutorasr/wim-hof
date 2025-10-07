@@ -12,3 +12,7 @@
     </UCard>
   </UContainer>
 </template>
+
+<script setup lang="ts">
+defineOgImageComponent('NuxtSeo')
+</script>

@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
-    "nuxt-schema-org"
+    "nuxt-schema-org",
+    "nuxt-og-image"
   ],
   css: ["~/assets/css/main.css"],
   scripts: {
@@ -31,5 +32,9 @@ export default defineNuxtConfig({
     rootAttrs: {
       class: 'flex-1 flex flex-col'
     }
+  },
+  site: {
+    name: "Wim Hof Method",
+    url: "https://csutorasr.github.io/wim-hof/",
   }
 });

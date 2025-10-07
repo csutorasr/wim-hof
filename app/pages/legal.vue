@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-// No script needed
+defineOgImageComponent('NuxtSeo')
 </script>
 
 <style scoped>
