@@ -1,9 +1,9 @@
 <template>
   <div class="space-y-8">
     <div class="space-y-4">
-      <h2 class="text-4xl font-bold">Hold Your Breath</h2>
+      <h2 class="text-4xl font-bold">{{ $t('breathingExercise.phases.hold.title') }}</h2>
       <p class="text-xl text-blue-200">
-        {{ isIndefinite ? 'Tap screen to continue' : 'Retention phase' }}
+        {{ isIndefinite ? $t('breathingExercise.phases.hold.subtitleIndefinite') : $t('breathingExercise.phases.hold.subtitleTimed') }}
       </p>
     </div>
     
@@ -12,9 +12,9 @@
     </div>
     
     <div class="space-y-2">
-      <p class="text-lg">Stay relaxed</p>
+      <p class="text-lg">{{ $t('breathingExercise.phases.hold.instruction1') }}</p>
       <p class="text-blue-200">
-        {{ isIndefinite ? 'Breathe when you need to' : 'Don\'t force it - breathe when you need to' }}
+        {{ isIndefinite ? $t('breathingExercise.phases.hold.instruction2Indefinite') : $t('breathingExercise.phases.hold.instruction2Timed') }}
       </p>
     </div>
   </div>

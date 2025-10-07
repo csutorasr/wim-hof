@@ -1,0 +1,138 @@
+{
+  "app": {
+    "title": "Wim Hof Légzés Alkalmazás",
+    "description": "Egy egyszerű webalkalmazás, amely végigvezet a Wim Hof légzőgyakorlatokon.",
+    "cookieBanner": {
+      "title": "Ez a weboldal sütiket és helyi tárolást használ",
+      "description": "Követést (Google Analytics) és helyi tárolást használunk a felhasználói élmény javítása érdekében. Az oldal további használatával elfogadod ezt a használatot."
+    },
+    "footer": {
+      "copyright": "Wim Hof Légzés Alkalmazás. Nem kapcsolódik a Wim Hof Módszerhez.",
+      "legalLink": "Jogi információk és felelősség",
+      "homeLink": "Főoldal"
+    }
+  },
+  "home": {
+    "title": "Wim Hof Módszer Légzőgyakorlat Alkalmazás",
+    "welcome": "Üdvözlünk! Fedezd fel az irányított légzőgyakorlatokat, kövesd a fejlődésed, és tanulj a Wim Hof Módszerről.",
+    "startButton": "Légzőgyakorlat kezdése"
+  },
+  "breathingExercise": {
+    "title": "Wim Hof Módszer",
+    "subtitle": "Állítsd be és indítsd el a légzőgyakorlatot",
+    "safetyNotice": {
+      "title": "⚠️ Fontos biztonsági figyelmeztetés",
+      "description": "A gyakorlat megkezdésével elismered, hogy elolvastad és elfogadtad az egészségügyi és biztonsági felelősségkizárást. Ezeket a technikákat saját felelősségedre használod.",
+      "warning": "Soha ne gyakorolj vezetés, úszás közben, vagy olyan helyzetben, ahol az eszméletvesztés veszélyt okozhat.",
+      "viewDisclaimer": "Teljes felelősségkizárás megtekintése"
+    },
+    "setupForm": {
+      "header": "Légzőgyakorlat beállítása",
+      "subtitle": "Állítsd be a Wim Hof Módszer légzőgyakorlat ülésed",
+      "globalSettings": "Globális beállítások",
+      "preparationTime": "Felkészülési idő (másodperc)",
+      "restBetweenRounds": "Pihenő a körök között (másodperc)",
+      "breathingRounds": "Légzési körök",
+      "addRound": "Kör hozzáadása",
+      "round": "Kör",
+      "breathingCycles": "Légzési ciklusok",
+      "breathingCyclesHelp": "Általában 30-40 ciklus köröként",
+      "inhaleDuration": "Belégzés időtartama (másodperc)",
+      "exhaleDuration": "Kilégzés időtartama (másodperc)",
+      "holdDuration": "Légzésvisszatartás időtartama (másodperc)",
+      "holdDurationHelp": "Visszatartás a kilégzés után (retenciós fázis)",
+      "indefiniteHold": "Határozatlan visszatartás",
+      "indefiniteHoldLabel": "Felfelé számolás kézi továbblépésig",
+      "indefiniteHoldHelp": "Tartsd vissza, amíg úgy döntesz, hogy folytatod",
+      "recoveryHold": "Helyreállító légzésvisszatartás (másodperc)",
+      "recoveryHoldHelp": "Visszatartás a helyreállító belégzés után",
+      "roundNotes": "Kör megjegyzései",
+      "roundNotesPlaceholder": "Opcionális megjegyzések...",
+      "estimatedTime": "Becsült teljes idő",
+      "estimatedTimeDescription": "Teljes ülés időtartama az összes körrel és pihenővel együtt",
+      "seconds": "másodperc",
+      "startButton": "Légzőgyakorlat indítása",
+      "savePreset": "Mentés sablonként",
+      "resetDefault": "Alapértelmezett visszaállítása",
+      "presetSaved": "Sablon mentve!",
+      "presetSavedDescription": "A légzőgyakorlat konfigurációd elmentve és automatikusan betöltődik legközelebb.",
+      "saveFailed": "Mentés sikertelen",
+      "saveFailedDescription": "A sablon mentése sikertelen. Kérjük, próbáld újra."
+    },
+    "session": {
+      "round": "Kör",
+      "of": "/",
+      "totalSession": "Teljes ülés",
+      "skipPhase": "Fázis átugrása",
+      "pause": "Szünet",
+      "resume": "Folytatás"
+    },
+    "phases": {
+      "preparation": {
+        "title": "Készülj fel",
+        "subtitle": "Készülj fel a légzőgyakorlatra",
+        "instruction1": "Keress egy kényelmes helyzetet",
+        "instruction2": "Lazulj el és összpontosíts a légzésedre"
+      },
+      "breathing": {
+        "inhale": "Belégzés",
+        "exhale": "Kilégzés",
+        "cycle": "Ciklus"
+      },
+      "hold": {
+        "title": "Tartsd vissza a lélegzeted",
+        "subtitleIndefinite": "Érintsd meg a képernyőt a folytatáshoz",
+        "subtitleTimed": "Visszatartási fázis",
+        "instruction1": "Maradj ellazulva",
+        "instruction2Indefinite": "Lélegezz, amikor szükséged van rá",
+        "instruction2Timed": "Ne erőltesd - lélegezz, amikor szükséged van rá"
+      },
+      "recovery": {
+        "title": "Helyreállító légzés",
+        "subtitle": "Vegyél egy mély lélegzetet és tartsd vissza",
+        "instruction1": "Mély belégzés és visszatartás",
+        "instruction2": "Érezd az energiát áramlani"
+      },
+      "rest": {
+        "title": "Pihenés",
+        "subtitle": "Készülj fel a következő körre",
+        "instruction1": "Lélegezz természetesen",
+        "nextRound": "Következő: Kör"
+      },
+      "completion": {
+        "title": "Ülés befejezve!",
+        "subtitle": "Szép munka!",
+        "completedRounds": "{count} kört teljesítettél",
+        "totalTime": "Teljes idő: {time}",
+        "holdDurations": "Visszatartási időtartamok",
+        "returnButton": "Vissza a beállításokhoz"
+      }
+    }
+  },
+  "legal": {
+    "title": "Jogi nyilatkozat",
+    "healthSafety": {
+      "title": "Egészségügyi és biztonsági felelősségkizárás",
+      "warning": "FIGYELMEZTETÉS: Ezen weboldal használatával és a légzőgyakorlatokban való részvétellel teljes felelősséget vállalsz minden következményért, sérülésért vagy károsodásért, amely ezen technikák használatából eredhet.",
+      "useAtRisk": "Saját felelősségre használd: Az ezen a weboldalon bemutatott légzőgyakorlatok és módszerek fizikailag megterhelőek lehetnek és kockázatot jelenthetnek az egészségedre. Csak azután használd ezeket a technikákat, hogy gondosan felméred a saját fizikai és mentális állapotodat, és csak akkor, ha magabiztosan használhatod őket biztonságosan.",
+      "medicalConsultation": "Orvosi konzultáció szükséges: Mielőtt bármilyen légzőgyakorlatot vagy fizikai gyakorlatot elkezdenél, konzultálj egy képzett egészségügyi szakemberrel, különösen, ha bármilyen már meglévő egészségügyi problémával rendelkezel, beleértve, de nem kizárólagosan:",
+      "conditions": {
+        "heart": "Szívbetegségek vagy szív- és érrendszeri betegségek",
+        "bloodPressure": "Magas vagy alacsony vérnyomás",
+        "respiratory": "Légzőszervi állapotok (asztma, COPD, stb.)",
+        "epilepsy": "Epilepszia vagy rohamkórságok",
+        "pregnancy": "Terhesség",
+        "other": "Bármilyen más egészségügyi probléma vagy aggály"
+      },
+      "safetyPrecautions": "Biztonsági óvintézkedések: Soha ne gyakorold ezeket a légzőgyakorlatokat vezetés, úszás, vízben tartózkodás közben, vagy olyan helyzetben, ahol az eszméletvesztés sérüléshez vagy halálhoz vezethet. Mindig biztonságos környezetben gyakorolj, lehetőleg ülve vagy fekve.",
+      "limitationLiability": "Felelősség korlátozása: Ezen weboldal készítői, karbantartói és közreműködői kifejezetten kizárnak minden felelősséget bármilyen sérülésért, károsodásért vagy káros hatásért, amely ezen weboldal vagy az itt leírt technikák használatából ered. Ezen weboldal használatával beleegyezel abba, hogy mentesíted a weboldal létrehozásában és karbantartásában részt vevő összes felet bármilyen, a használatodból eredő követeléstől, kárigénytől vagy veszteségtől.",
+      "noProfessionalAdvice": "Nem szakmai tanácsadás: Ez a weboldal nem nyújt orvosi tanácsot, diagnózist vagy kezelést. A tartalom kizárólag tájékoztató jellegű, és nem tekinthető szakmai orvosi tanácsadás, diagnózis vagy kezelés helyettesítőjének."
+    },
+    "intellectualProperty": {
+      "title": "Szellemi tulajdon felelősségkizárása",
+      "noAffiliation": "Nincs kapcsolat: Ez a weboldal és alkalmazás nem kapcsolódik, nem támogatott és nem hivatalosan összekapcsolódik Wim Hof-fal vagy a Wim Hof Módszer szervezetével. A Wim Hof Módszer Wim Hof és csapatának szellemi tulajdona. Ez a projekt egy független, nem kereskedelmi eszköz, amely kizárólag oktatási és személyes használatra készült.",
+      "credit": "Minden elismerés a Wim Hof Módszerért, annak technikáiért és nevéért Wim Hof-ot illeti. Hivatalos információkért, képzésért és forrásokért látogasd meg a hivatalos Wim Hof Módszer weboldalát.",
+      "rightsHolder": "Ha a jogok tulajdonosa vagy és változtatásokat vagy eltávolítást kérsz, kérjük, lépj kapcsolatba az oldal tulajdonosával."
+    }
+  }
+}

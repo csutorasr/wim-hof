@@ -17,12 +17,12 @@
             'scale-100': instruction === 'Inhale'
           }"
         >
-          <div class="text-3xl font-bold mb-2">{{ instruction }}</div>
+          <div class="text-3xl font-bold mb-2">{{ $t(`breathingExercise.phases.breathing.${instruction.toLowerCase()}`) }}</div>
           <div class="text-6xl font-bold mb-2">
             {{ Math.ceil(timer) }}
           </div>
           <div class="text-sm text-blue-200">
-            Cycle {{ currentCycle + 1 }} of {{ totalCycles }}
+            {{ $t('breathingExercise.phases.breathing.cycle') }} {{ currentCycle + 1 }} {{ $t('breathingExercise.session.of') }} {{ totalCycles }}
           </div>
         </div>
       </div>

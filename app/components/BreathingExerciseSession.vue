@@ -22,14 +22,14 @@
             @click="exitSession"
           />
           <div>
-            <h1 class="text-xl font-bold">Wim Hof Method</h1>
-            <p class="text-blue-200 text-sm">Round {{ currentRound + 1 }} of {{ exerciseConfig.rounds.length }}</p>
+            <h1 class="text-xl font-bold">{{ $t('breathingExercise.title') }}</h1>
+            <p class="text-blue-200 text-sm">{{ $t('breathingExercise.session.round') }} {{ currentRound + 1 }} {{ $t('breathingExercise.session.of') }} {{ exerciseConfig.rounds.length }}</p>
           </div>
         </div>
         
         <div class="text-right">
           <div class="text-2xl font-bold">{{ formattedTotalTime }}</div>
-          <div class="text-blue-200 text-sm">Total Session</div>
+          <div class="text-blue-200 text-sm">{{ $t('breathingExercise.session.totalSession') }}</div>
         </div>
       </div>
     </div>
@@ -97,7 +97,7 @@
               class="px-6 py-4 text-lg min-h-14"
               @click="skipPhase"
             >
-              Skip Phase
+              {{ $t('breathingExercise.session.skipPhase') }}
             </UButton>
             <UButton
               :icon="isPaused ? 'i-heroicons-play' : 'i-heroicons-pause'"
@@ -107,7 +107,7 @@
               class="px-6 py-4 text-lg min-h-14"
               @click="togglePause"
             >
-              {{ isPaused ? 'Resume' : 'Pause' }}
+              {{ isPaused ? $t('breathingExercise.session.resume') : $t('breathingExercise.session.pause') }}
             </UButton>
           </div>
         </div>
@@ -115,7 +115,7 @@
         <!-- Round Counter -->
         <div v-if="currentPhase !== 'complete'" class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
           <div class="text-sm text-white/70 text-center">
-            Round {{ currentRound + 1 }} of {{ exerciseConfig.rounds.length }}
+            {{ $t('breathingExercise.session.round') }} {{ currentRound + 1 }} {{ $t('breathingExercise.session.of') }} {{ exerciseConfig.rounds.length }}
           </div>
         </div>
       </div>

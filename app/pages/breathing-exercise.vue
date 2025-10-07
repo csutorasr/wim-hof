@@ -3,23 +3,23 @@
   <div v-if="!isExerciseActive" class="min-h-screen bg-gray-50 py-8">
     <UContainer class="max-w-4xl">
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">Wim Hof Method</h1>
-        <p class="text-lg text-gray-600">Configure and start your breathing exercise</p>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $t('breathingExercise.title') }}</h1>
+        <p class="text-lg text-gray-600">{{ $t('breathingExercise.subtitle') }}</p>
       </div>
 
       <UAlert
         color="error"
         variant="solid"
         icon="i-heroicons-exclamation-triangle"
-        title="⚠️ Important Safety Notice"
+        :title="$t('breathingExercise.safetyNotice.title')"
         class="mb-6"
       >
         <template #description>
-          <p class="mb-2">By proceeding with this exercise, you acknowledge that you have read and accepted our health & safety disclaimer. You use these techniques at your own risk.</p>
-          <p class="text-sm">Never practice while driving, swimming, or in any situation where loss of consciousness could cause harm.</p>
+          <p class="mb-2">{{ $t('breathingExercise.safetyNotice.description') }}</p>
+          <p class="text-sm">{{ $t('breathingExercise.safetyNotice.warning') }}</p>
         </template>
         <template #actions>
-          <UButton :to="$localePath('legal')" color="neutral" variant="solid" size="sm">View Full Disclaimer</UButton>
+          <UButton :to="$localePath('legal')" color="neutral" variant="solid" size="sm">{{ $t('breathingExercise.safetyNotice.viewDisclaimer') }}</UButton>
         </template>
       </UAlert>
 
@@ -142,6 +142,7 @@ const handleExitSession = () => {
 
 // Modal state
 const toast = useToast()
+const { t } = useI18n()
 
 // Handle saving preset from the form component
 const handleSavePreset = (presetData: ExerciseConfig) => {
@@ -156,8 +157,8 @@ const handleSavePreset = (presetData: ExerciseConfig) => {
 
       // Show success toast
       toast.add({
-        title: 'Preset Saved!',
-        description: 'Your breathing exercise configuration has been saved and will be loaded automatically next time.',
+        title: t('breathingExercise.setupForm.presetSaved'),
+        description: t('breathingExercise.setupForm.presetSavedDescription'),
         icon: 'i-heroicons-check-circle',
         color: 'success'
       })
@@ -166,8 +167,8 @@ const handleSavePreset = (presetData: ExerciseConfig) => {
 
       // Show error toast
       toast.add({
-        title: 'Save Failed',
-        description: 'Failed to save preset. Please try again.',
+        title: t('breathingExercise.setupForm.saveFailed'),
+        description: t('breathingExercise.setupForm.saveFailedDescription'),
         icon: 'i-heroicons-exclamation-triangle',
         color: 'error'
       })

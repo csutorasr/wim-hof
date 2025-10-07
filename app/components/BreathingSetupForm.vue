@@ -1,16 +1,16 @@
 <template>
   <UCard class="w-full max-w-2xl">
     <template #header>
-      <h2 class="text-xl font-semibold">Breathing Exercise Setup</h2>
-      <p class="text-sm text-gray-600 mt-1">Configure your Wim Hof Method breathing session</p>
+      <h2 class="text-xl font-semibold">{{ $t('breathingExercise.setupForm.header') }}</h2>
+      <p class="text-sm text-gray-600 mt-1">{{ $t('breathingExercise.setupForm.subtitle') }}</p>
     </template>
 
     <div class="space-y-6">
       <!-- Global Settings -->
       <div class="border-b pb-4">
-        <h3 class="text-lg font-medium mb-3">Global Settings</h3>
+        <h3 class="text-lg font-medium mb-3">{{ $t('breathingExercise.setupForm.globalSettings') }}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <UFormField label="Preparation Time (seconds)">
+          <UFormField :label="$t('breathingExercise.setupForm.preparationTime')">
             <UInput 
               v-model.number="globalSettings.preparationTime" 
               type="number" 
@@ -18,7 +18,7 @@
               max="60"
             />
           </UFormField>
-          <UFormField label="Rest Between Rounds (seconds)">
+          <UFormField :label="$t('breathingExercise.setupForm.restBetweenRounds')">
             <UInput 
               v-model.number="globalSettings.restBetweenRounds" 
               type="number" 
@@ -32,9 +32,9 @@
       <!-- Rounds Configuration -->
       <div>
         <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-medium">Breathing Rounds</h3>
+          <h3 class="text-lg font-medium">{{ $t('breathingExercise.setupForm.breathingRounds') }}</h3>
           <UButton icon="i-heroicons-plus" size="sm" @click="addRound">
-            Add Round
+            {{ $t('breathingExercise.setupForm.addRound') }}
           </UButton>
         </div>
 
@@ -46,7 +46,7 @@
           >
             <template #header>
               <div class="flex items-center justify-between">
-                <h4 class="font-medium">Round {{ index + 1 }}</h4>
+                <h4 class="font-medium">{{ $t('breathingExercise.setupForm.round') }} {{ index + 1 }}</h4>
                 <UButton 
                   icon="i-heroicons-trash"
                   color="red"
@@ -59,7 +59,7 @@
             </template>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <UFormField label="Breathing Cycles">
+              <UFormField :label="$t('breathingExercise.setupForm.breathingCycles')">
                 <UInput 
                   v-model.number="round.cycles" 
                   type="number" 
@@ -68,11 +68,11 @@
                   placeholder="30"
                 />
                 <template #help>
-                  <span class="text-xs">Typically 30-40 cycles per round</span>
+                  <span class="text-xs">{{ $t('breathingExercise.setupForm.breathingCyclesHelp') }}</span>
                 </template>
               </UFormField>
 
-              <UFormField label="Inhale Duration (seconds)">
+              <UFormField :label="$t('breathingExercise.setupForm.inhaleDuration')">
                 <UInput 
                   v-model.number="round.inhaleDuration" 
                   type="number" 
@@ -83,7 +83,7 @@
                 />
               </UFormField>
 
-              <UFormField label="Exhale Duration (seconds)">
+              <UFormField :label="$t('breathingExercise.setupForm.exhaleDuration')">
                 <UInput 
                   v-model.number="round.exhaleDuration" 
                   type="number" 
@@ -94,7 +94,7 @@
                 />
               </UFormField>
 
-              <UFormField label="Hold Duration (seconds)">
+              <UFormField :label="$t('breathingExercise.setupForm.holdDuration')">
                 <UInput 
                   v-model.number="round.holdDuration" 
                   type="number" 
@@ -104,21 +104,21 @@
                   :disabled="round.indefiniteHold"
                 />
                 <template #help>
-                  <span class="text-xs">Hold after exhale (retention)</span>
+                  <span class="text-xs">{{ $t('breathingExercise.setupForm.holdDurationHelp') }}</span>
                 </template>
               </UFormField>
 
-              <UFormField label="Indefinite Hold">
+              <UFormField :label="$t('breathingExercise.setupForm.indefiniteHold')">
                 <UCheckbox 
                   v-model="round.indefiniteHold"
-                  label="Count upwards until manually skipped"
+                  :label="$t('breathingExercise.setupForm.indefiniteHoldLabel')"
                 />
                 <template #help>
-                  <span class="text-xs">Hold until you choose to continue</span>
+                  <span class="text-xs">{{ $t('breathingExercise.setupForm.indefiniteHoldHelp') }}</span>
                 </template>
               </UFormField>
 
-              <UFormField label="Recovery Breath Hold (seconds)">
+              <UFormField :label="$t('breathingExercise.setupForm.recoveryHold')">
                 <UInput 
                   v-model.number="round.recoveryHold" 
                   type="number" 
@@ -127,14 +127,14 @@
                   placeholder="15"
                 />
                 <template #help>
-                  <span class="text-xs">Hold after recovery inhale</span>
+                  <span class="text-xs">{{ $t('breathingExercise.setupForm.recoveryHoldHelp') }}</span>
                 </template>
               </UFormField>
 
-              <UFormField label="Round Notes">
+              <UFormField :label="$t('breathingExercise.setupForm.roundNotes')">
                 <UInput 
                   v-model="round.notes" 
-                  placeholder="Optional notes..."
+                  :placeholder="$t('breathingExercise.setupForm.roundNotesPlaceholder')"
                 />
               </UFormField>
             </div>
@@ -146,12 +146,12 @@
       <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
         <div class="flex items-center justify-between">
           <div>
-            <h4 class="font-medium text-blue-900">Estimated Total Time</h4>
-            <p class="text-sm text-blue-700 mt-1">Complete session duration including all rounds and rest periods</p>
+            <h4 class="font-medium text-blue-900">{{ $t('breathingExercise.setupForm.estimatedTime') }}</h4>
+            <p class="text-sm text-blue-700 mt-1">{{ $t('breathingExercise.setupForm.estimatedTimeDescription') }}</p>
           </div>
           <div class="text-right">
             <div class="text-2xl font-bold text-blue-900">{{ formattedTime }}</div>
-            <div class="text-sm text-blue-600">{{ totalEstimatedTime }} seconds</div>
+            <div class="text-sm text-blue-600">{{ totalEstimatedTime }} {{ $t('breathingExercise.setupForm.seconds') }}</div>
           </div>
         </div>
       </div>
@@ -159,13 +159,13 @@
       <!-- Action Buttons -->
       <div class="flex gap-3 pt-4 border-t">
         <UButton color="primary" size="lg" class="flex-1" @click="startExercise">
-          Start Breathing Exercise
+          {{ $t('breathingExercise.setupForm.startButton') }}
         </UButton>
         <UButton variant="outline" size="lg" @click="savePreset">
-          Save as Preset
+          {{ $t('breathingExercise.setupForm.savePreset') }}
         </UButton>
         <UButton variant="ghost" size="lg" @click="resetToDefault">
-          Reset to Default
+          {{ $t('breathingExercise.setupForm.resetDefault') }}
         </UButton>
       </div>
     </div>

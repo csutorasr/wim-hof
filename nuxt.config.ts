@@ -25,11 +25,6 @@ export default defineNuxtConfig({
     },
   },
   app: {
-    head: {
-      htmlAttrs: {
-        lang: "en",
-      },
-    },
     rootAttrs: {
       class: "flex-1 flex flex-col",
     },
@@ -41,8 +36,14 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: "en",
     locales: [
-      { code: "en", iso: "en-US", name: "English" },
-      { code: "hu", iso: "hu-HU", name: "Magyar" },
+      { code: "en", iso: "en-US", name: "English", file: "en.json" },
+      { code: "hu", iso: "hu-HU", name: "Magyar", file: "hu.json" },
     ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+    },
+    baseUrl: "https://csutorasr.github.io/wim-hof/",
   },
 });
