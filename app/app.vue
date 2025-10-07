@@ -9,6 +9,27 @@
         you accept this usage.
       </template>
     </UBanner>
+    
+    <!-- Language Selector -->
+    <div class="border-b border-gray-200 bg-gray-900 py-2">
+      <UContainer>
+        <div class="flex justify-end">
+          <div class="flex gap-2">
+            <UButton
+              v-for="locale in locales"
+              :key="locale.code"
+              variant="ghost"
+              size="xs"
+              :color="$i18n.locale === locale.code ? 'primary' : 'neutral'"
+              @click="setLocale(locale.code)"
+            >
+              {{ locale.name }}
+            </UButton>
+          </div>
+        </div>
+      </UContainer>
+    </div>
+    
     <NuxtRouteAnnouncer />
     <main class="flex-1 flex flex-col">
       <NuxtPage />
@@ -32,6 +53,8 @@
 <script setup lang="ts">
 const { proxy } = useScriptGoogleAnalytics()
 proxy.gtag('event', 'page_view')
+
+const { locales, setLocale } = useI18n()
 
 useHead({
   titleTemplate: '%s - Wim Hof Breathing App',

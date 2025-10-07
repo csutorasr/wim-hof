@@ -13,28 +13,36 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
     "nuxt-schema-org",
-    "nuxt-og-image"
+    "nuxt-og-image",
+    "@nuxtjs/i18n",
   ],
   css: ["~/assets/css/main.css"],
   scripts: {
     registry: {
       googleAnalytics: {
-        id: 'G-K3RQL4YR4K',
-      }
-    }
+        id: "G-K3RQL4YR4K",
+      },
+    },
   },
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en'
-      }
+        lang: "en",
+      },
     },
     rootAttrs: {
-      class: 'flex-1 flex flex-col'
-    }
+      class: "flex-1 flex flex-col",
+    },
   },
   site: {
     name: "Wim Hof Method",
     url: "https://csutorasr.github.io/wim-hof/",
-  }
+  },
+  i18n: {
+    defaultLocale: "en",
+    locales: [
+      { code: "en", iso: "en-US", name: "English" },
+      { code: "hu", iso: "hu-HU", name: "Magyar" },
+    ],
+  },
 });
