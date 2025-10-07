@@ -19,7 +19,7 @@
           <p class="text-sm">Never practice while driving, swimming, or in any situation where loss of consciousness could cause harm.</p>
         </template>
         <template #actions>
-          <UButton to="/legal" color="neutral" variant="solid" size="sm">View Full Disclaimer</UButton>
+          <UButton :to="$localePath('legal')" color="neutral" variant="solid" size="sm">View Full Disclaimer</UButton>
         </template>
       </UAlert>
 

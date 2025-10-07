@@ -6,8 +6,8 @@
         Hof Method.</p>
 
       <div class="flex flex-col gap-4 justify-center items-center">
-        <UButton to="/breathing-exercise" color="primary" variant="solid" size="lg" class="w-fit">Start Breathing Exercise</UButton>
-        <!-- <UButton to="/articles" color="neutral" variant="outline">Learn More</UButton> -->
+        <UButton :to="$localePath('breathing-exercise')" color="primary" variant="solid" size="lg" class="w-fit">Start Breathing Exercise</UButton>
+        <!-- <UButton :to="$localePath('articles')" color="neutral" variant="outline">Learn More</UButton> -->
       </div>
     </UCard>
   </UContainer>

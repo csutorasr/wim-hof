@@ -41,8 +41,8 @@
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-600">
           <p>&copy; {{ new Date().getFullYear() }} Wim Hof Breathing App. Not affiliated with Wim Hof Method.</p>
           <div class="flex gap-4">
-            <UButton to="/legal" variant="link" size="xs" color="neutral">Legal & Disclaimer</UButton>
-            <UButton to="/" variant="link" size="xs" color="neutral">Home</UButton>
+            <UButton :to="$localePath('legal')" variant="link" size="xs" color="neutral">Legal & Disclaimer</UButton>
+            <UButton :to="$localePath('index')" variant="link" size="xs" color="neutral">Home</UButton>
           </div>
         </div>
       </UContainer>
