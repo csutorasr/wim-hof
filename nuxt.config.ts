@@ -10,11 +10,11 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@nuxt/test-utils",
     "@nuxt/ui",
-    "@nuxtjs/sitemap",
     "@nuxtjs/robots",
     "nuxt-schema-org",
     "nuxt-og-image",
     "@nuxtjs/i18n",
+    "@nuxtjs/sitemap",
   ],
   css: ["~/assets/css/main.css"],
   scripts: {
@@ -32,6 +32,9 @@ export default defineNuxtConfig({
   site: {
     name: "Wim Hof Method",
     url: "https://csutorasr.github.io/wim-hof/",
+  },
+  sitemap: {
+    autoI18n: true,
   },
   i18n: {
     defaultLocale: "en",
